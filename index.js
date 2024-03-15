@@ -3,6 +3,8 @@ const app = express();
 const mongoose = require("mongoose");
 const salahTime = require("./app/routes/salahTime");
 
+require("./startup/prod")(app);
+
 mongoose
 	.connect("mongodb://localhost/salahtime")
 	.then(() => console.log("Connected to Mongodb..."))
