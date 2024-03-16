@@ -1,4 +1,6 @@
 const express = require("express");
+const config = require("config");
+
 const app = express();
 const mongoose = require("mongoose");
 const salahTime = require("./app/routes/salahTime");
@@ -6,7 +8,7 @@ const salahTime = require("./app/routes/salahTime");
 require("./startup/prod")(app);
 
 mongoose
-	.connect("mongodb://localhost/salahtime")
+	.connect(config.get("db"))
 	.then(() => console.log("Connected to Mongodb..."))
 	.catch(() => console.log("Could not connected to Mongodb..."));
 

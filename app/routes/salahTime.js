@@ -77,7 +77,8 @@ router.get("/", async (req, res) => {
 	res.send(await Mosque.find());
 });
 router.get("/:id", async (req, res) => {
-	res.send(await Mosque.findById(req.params.id));
+	if (req.params.id == "test") res.send("Yes! Working");
+	else res.send(await Mosque.findById(req.params.id));
 });
 
 router.post("/", async (req, res) => {
