@@ -69,29 +69,35 @@ const searchMosque = async (query) => {
 	return (result = await Mosque.find({ name: searchQuery }));
 };
 
-router.get("/", async (req, res) => {
-	if (req.query.search) {
-		res.send(await searchMosque(req.query.search));
-		return;
-	}
-	res.send(await Mosque.find());
-});
-router.get("/:id", async (req, res) => {
-	if (req.params.id == "test") res.send("Yes! Working");
-	else res.send(await Mosque.findById(req.params.id));
-});
+try {
+	router.get("/", async (req, res) => {
+		if (req.query.search) {
+			res.send(await searchMosque(req.query.search));
+			return;
+		}
+		res.send(await Mosque.find());
+	});
 
-router.post("/", async (req, res) => {
-	console.log(req.body);
-	res.send(await createMosque(req.body));
-});
+	router.get("/:id", async (req, res) => {
+		if (req.params.id == "test") res.send("Yes! Working");
+		else res.send(await Mosque.findById(req.params.id));
+	});
 
-router.put("/:id", async (req, res) => {
-	console.log(req.body);
-	res.send(await updateMosque(req.params.id, req.body));
-});
+	router.post("/", async (req, res) => {
+		console.log(req.body);
+		res.send(await createMosque(req.body));
+	});
 
-router.delete("/:id", async (req, res) => {
-	res.send(await deleteMosque(req.params.id));
-});
+	router.put("/:id", async (req, res) => {
+		console.log(req.body);
+		res.send(await updateMosque(req.params.id, req.body));
+	});
+
+	router.delete("/:id", async (req, res) => {
+		res.send(await deleteMosque(req.params.id));
+	});
+} catch (error) {
+	res.send(error);
+}
+
 module.exports = router;
