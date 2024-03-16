@@ -7,10 +7,12 @@ const salahTime = require("./app/routes/salahTime");
 
 require("./startup/prod")(app);
 
+let db_connect = config.get("db");
+console.log(db_connect);
 mongoose
-	.connect(config.get("db"))
+	.connect(db_connect)
 	.then(() => console.log("Connected to Mongodb..."))
-	.catch(() => console.log("Could not connected to Mongodb..."));
+	.catch((e) => console.log(e.message));
 
 app.use(express.json());
 app.use("/api/salahtime", salahTime);
